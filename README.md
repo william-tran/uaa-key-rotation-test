@@ -12,14 +12,13 @@ Add this to your /etc/hosts:
 ```
 $ mvn cargo:run
 ```
-
-After UAA starts up, in a new tab:
+This will run uaa on http://localhost:8080/uaa. After UAA starts up, in a new tab:
 
 ```
 $ ./init.sh
 ```
 
-This will create the test identity zone that can be used to perform key rotations, with the active signing key set to 0.pem, and the public keys of 0.pem and 1.pem in the JWKS. It will also create a client that you can get a token for.
+This will create the test identity zone at http://test.localhost:8080/uaa that can be used to perform key rotations, with the active signing key set to 0.pem, and the public keys of 0.pem and 1.pem in the JWKS. It will also create a client that you can get a token for.
 
 ## Perform a key rotation
 
