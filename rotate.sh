@@ -9,4 +9,5 @@ do
 	KEYS="$KEYS\"$KEY_ID\":{\"signingKey\":\"$KEY\"}"
 done
 
-uaac curl -X PUT -H'Content-type:application/json' /identity-zones/test -d "{\"id\":\"test\",\"subdomain\": \"test\",\"name\": \"test\",\"config\":{\"tokenPolicy\":{\"keys\":{$KEYS},\"activeKeyId\":\"$1\"}}}"
+ZONE_ID=$(uaac curl -H'Content-type:application/json' /identity-zones | grep -B1 "\"subdomain\": \"$ZONE_SUBDOMAIN\"" | grep '"id"' | awk '{print $2}' | sed 's/"//g' | sed 's/,//')
+uaac curl -X PUT -H'Content-type:application/json' /identity-zones/$ZONE_ID -d "{\"id\":\"$ZONE_ID\",\"subdomain\": \"$ZONE_SUBDOMAIN\",\"name\": \"$ZONE_SUBDOMAIN\",\"config\":{\"tokenPolicy\":{\"keys\":{$KEYS},\"activeKeyId\":\"$1\"}}}"
